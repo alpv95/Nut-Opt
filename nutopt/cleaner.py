@@ -27,7 +27,7 @@ def clean_data():
     units['galactose'] = 'g'
     units['cholesterol'] = 'mg'
 
-    cols_with_unit = df.columns.drop(['calories'])
+    cols_with_unit = df.columns.drop(['name', 'calories'])
     for col in df[cols_with_unit]:
         df[col] = df[col].apply(delete_unit)
 

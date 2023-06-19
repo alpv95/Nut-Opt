@@ -47,7 +47,7 @@ def print_constraints(constraints, units):
         print(f"{lower} < {k} ({units[k].replace(' ','')}) < {upper}")
 
 def solve_lp_sweep(df: pd.DataFrame, constraints: dict, gamma_vals: Sequence, 
-                   names: dict):
+                   names: Sequence):
     '''
     Solves optimal diet LP problem for a sweep over the tradeoff parameter gamma.
     Tradeoff between calories and weight.
@@ -56,9 +56,11 @@ def solve_lp_sweep(df: pd.DataFrame, constraints: dict, gamma_vals: Sequence,
     Output: list of calories, list of weights, Counter of foods
     '''
     n = len(df)
+    assert n == len(names), "Number of foods and names must be equal."
+
     ones = np.ones(n) # vector of food weights in units of 100g.
     calories = df['calories'].values
-    idxs = np.array([i for i in range(n)])
+    idxs = np.arange(n)
     tol = 1e-6
     Al, Au, l, u = build_constraint_vectors(df, constraints)
 

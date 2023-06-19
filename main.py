@@ -16,10 +16,11 @@ args = parser.parse_args()
 
 def main():
     df = cleaner.clean_data()
-    if len(args.foods) != 0:
+    if args.foods is not None:
         df = cleaner.subselect_data(df, args.foods)
 
     # Drop name column and make name dictionary.
+    df.reset_index(drop=True, inplace=True)
     names = df['name']
     df = df.drop('name', axis=1)
     name_to_idx = {v: k for k, v in names.to_dict().items()}
@@ -30,13 +31,13 @@ def main():
     constraints = optimizer.build_constraints_dict(lower, upper)
     optimizer.print_constraints(constraints, units)
 
-    gamma_vals = np.logspace(-1,2,args.n_sweep)
+    gamma_vals = np.logspace(-1, 2, args.n_sweep)
     cals, weights, food_count = optimizer.solve_lp_sweep(df, constraints, gamma_vals, names)
 
     plotter.plot_sweep(cals, weights, gamma_vals)
     plotter.plot_food_count(food_count, gamma_vals)
     plotter.nutritional_radar_plot(df, 
-                                   [name_to_idx[name] for name, _ in zip(*food_count.most_common(args.n_plot))], 
+                                   [name_to_idx[name] for name, _ in food_count.most_common(args.n_plot)], 
                                    names)
 
 if __name__ == "__main__":

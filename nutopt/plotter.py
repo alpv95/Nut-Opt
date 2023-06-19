@@ -18,7 +18,8 @@ def plot_food_count(food_count: Counter, gamma_vals):
     width = 1
 
     ax.bar(indexes, [value / len(gamma_vals) * 100 for value in values], width)
-    ax.xticks(indexes + width * 0.5, labels, rotation='vertical')
+    ax.set_xticks(indexes + width * 0.5)
+    ax.set_xticklabels(labels, rotation='vertical')
     ax.set_ylabel("Appearance Fraction [%]")
     plt.savefig(os.path.join(plot_dir,'food_count.pdf'), format='pdf', dpi=300)
 

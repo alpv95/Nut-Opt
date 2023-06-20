@@ -78,8 +78,7 @@ def solve_lp_sweep(df: pd.DataFrame, constraints: dict, gamma_vals: Sequence,
         gamma.value = gamma_vals[i]
         prob.solve()
         if x.value is None:
-            print('Problem infeasible')
-            break
+            raise Exception('Problem infeasible.')
 
         # Print result.
         print('Total calories: ', calories @ x.value, 'kcal')

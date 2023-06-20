@@ -21,7 +21,7 @@ def plot_food_count(food_count: Counter, gamma_vals):
     ax.set_xticks(indexes + width * 0.5)
     ax.set_xticklabels(labels, rotation='vertical')
     ax.set_ylabel("Appearance Fraction [%]")
-    plt.savefig(os.path.join(plot_dir,'food_count.pdf'), format='pdf', dpi=300)
+    plt.savefig(os.path.join(plot_dir,'food_count.pdf'), format='pdf', dpi=300, bbox_inches="tight")
 
 def plot_sweep(cals, weights, gamma_vals):
     # Pareto frontier
@@ -35,17 +35,17 @@ def plot_sweep(cals, weights, gamma_vals):
 
     ax.set_ylabel('Weight [g]')
     ax.set_xlabel('Calories [kcal]')
-    plt.savefig(os.path.join(plot_dir,'pareto_frontier.pdf'), format='pdf', dpi=300)
+    plt.savefig(os.path.join(plot_dir,'pareto_frontier.pdf'), format='pdf', dpi=300, bbox_inches="tight")
 
-def nutritional_radar_plot(df: pd.DataFrame, food_idxs: Sequence, names: dict):
+def nutritional_radar_plot(df: pd.DataFrame, food_idxs: Sequence, names: dict, 
+                           n_contours: int=5, ranges: list=[20,1.5,800,20,300,10]):
     fig, axs = plt.subplots(figsize=(12,12), ncols=2, nrows=3, subplot_kw=dict(polar=True), 
                         gridspec_kw={'wspace': 0.0, 'hspace': 0.5})
     axs = axs.flatten()
-    n_contours = 5
 
     for ax, group, radius in zip(axs,[summary, essential, 
                                     macro_minerals, trace_minerals, 
-                                    vitamins, fatty_acids],[20,1.5,800,20,300,10]):
+                                    vitamins, fatty_acids],ranges):
         ax.set_ylim(0, radius)
         ax.set_rgrids(np.linspace(0, radius, n_contours))
         
@@ -66,4 +66,4 @@ def nutritional_radar_plot(df: pd.DataFrame, food_idxs: Sequence, names: dict):
 
             
     ax.legend(loc='upper left', bbox_to_anchor=(0.63,1.4))
-    plt.savefig(os.path.join(plot_dir,'radar.pdf'), format='pdf', dpi=300)
+    plt.savefig(os.path.join(plot_dir,'radar.pdf'), format='pdf', dpi=300, bbox_inches="tight")

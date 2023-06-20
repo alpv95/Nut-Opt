@@ -128,6 +128,7 @@ For all foods in the dataset and all default constraints active. The optimal tra
 And here is the optimal diet for $\gamma = 1$ with weight in units of 100g:
 
 Total calories:  871.1281429945614 kcal
+
 Total weight:  1113.0965300000835 g
 
 #### Weight (100g)     Name

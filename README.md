@@ -5,14 +5,12 @@ Backend for [my blog post on finding the optimal diet and identifying superfoods
 
 Minimize $c^T\mathbf{x} + \gamma\mathcal{1}^T\mathbf{x}$
 
-subject to $l \leq A\mathbf{x} \leq u$
-
-                $\mathbf{x} \geq 0$
+subject to $l \leq A\mathbf{x} \leq u$, $\mathbf{x} \geq 0$
 
 where $c$ is the vector of calories per 100g, the ones vector $\mathcal{1}$ is the vector of weights in units of 100g, $\mathbf{x}$ is the vector of weights of each food in units of 100g, and $\gamma$ is the tradeoff variable. The constraints $l$ and $u$ are the lower and upper bounds on the nutrient features, respectively. The matrix $A$ is the matrix of constrained nutrients per 100g of each food.
 
 ## Usage
-`python main.py -f <food_list> --n_sweep <n> --n_plot <n>`
+```python main.py -f <food_list> --n_sweep <n> --n_plot <n>```
 
 `-f` is a comma-separated list of foods to include in the optimization. If not specified, all foods are included.
 
@@ -125,7 +123,7 @@ These are editable in `nutopt/definitions.py`. The default constraints are:
 ## Results
 For all foods in the dataset and all default constraints active. The optimal tradeoff curve between calories and weight is shown below. 
 
-![pareto](../figures/pareto_frontier.png)
+![pareto](figures/pareto_frontier.png)
 
 And here is the optimal diet for $\gamma = 1$ with weight in units of 100g:
 
@@ -172,8 +170,8 @@ Total weight:  1113.0965300000835 g
 ### Superfoods
 Count of how many times foods appear in optimal diets.
 
-![food bar](../figures/food_count.png)
+![food bar](figures/food_count.png)
 
 Nutritional characteristics of the top four superfoods.
 
-![radar plot](../figures/radar.png)
+![radar plot](figures/radar.png)

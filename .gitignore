@@ -3,4 +3,4 @@ notebooks/
 .vscode
 food_names_subset.csv
 nutrition_clean_subset.csv
-__pycache__/
+*__pycache__/*

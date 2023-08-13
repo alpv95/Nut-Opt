@@ -4,6 +4,7 @@ import cvxpy as cp
 from collections import Counter
 from collections.abc import Sequence
 
+from .definitions import amino_acids
 
 def get_constraint_vectors(constraints):
     ''' '''
@@ -20,10 +21,16 @@ def get_constraint_vectors(constraints):
             upper.append(v[1])
     return lower, upper, lower_idx, upper_idx
 
-def build_constraints_dict(lower, upper):
+def build_constraints_dict(lower, upper, amino):
     ''' '''
     constraints = {k_up: (v_low, v_up) for (k_up, v_up), (_, v_low) in zip(upper.items(), lower.items()) 
     if not (isinstance(v_low, str) and isinstance(v_up, str))}
+    if not amino: # remove amino acid constraints.
+        for a in amino_acids:
+            try:
+                constraints.pop(a)
+            except KeyError:
+                pass
     return constraints
 
 def build_constraint_vectors(df: pd.DataFrame, constraints: dict):

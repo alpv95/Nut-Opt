@@ -1,4 +1,5 @@
-from . import utils
-from . import cleaner
-from . import definitions
-from . import optimizer
+from pkg_resources import get_distribution, DistributionNotFound
+try:
+    __version__ = get_distribution(__name__).version
+except DistributionNotFound:
+    pass  # package is not installed

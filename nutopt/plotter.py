@@ -5,12 +5,10 @@ import os
 from collections import Counter
 from collections.abc import Sequence
 
-from nutopt.definitions import *
+from .definitions import *
 
 
-plot_dir = '../figures/'
-
-def plot_food_count(food_count: Counter, gamma_vals):
+def plot_food_count(food_count: Counter, gamma_vals, plot_dir):
     fig, ax = plt.subplots(figsize=(10,5))
     labels, values = zip(*food_count.most_common())
 
@@ -23,7 +21,7 @@ def plot_food_count(food_count: Counter, gamma_vals):
     ax.set_ylabel("Appearance Fraction [%]")
     plt.savefig(os.path.join(plot_dir,'food_count.png'), format='png', dpi=300, bbox_inches="tight")
 
-def plot_sweep(cals, weights, gamma_vals):
+def plot_sweep(cals, weights, gamma_vals, plot_dir):
     # Pareto frontier
     fig, ax = plt.subplots()
 
@@ -37,7 +35,7 @@ def plot_sweep(cals, weights, gamma_vals):
     ax.set_xlabel('Calories [kcal]')
     plt.savefig(os.path.join(plot_dir,'pareto_frontier.png'), format='png', dpi=300, bbox_inches="tight")
 
-def nutritional_radar_plot(df: pd.DataFrame, food_idxs: Sequence, names: dict, 
+def nutritional_radar_plot(df: pd.DataFrame, food_idxs: Sequence, names: dict, plot_dir: str,
                            n_contours: int=5, ranges: list=[20,1.5,800,20,300,10]):
     fig, axs = plt.subplots(figsize=(12,12), ncols=2, nrows=3, subplot_kw=dict(polar=True), 
                         gridspec_kw={'wspace': 0.0, 'hspace': 0.5})

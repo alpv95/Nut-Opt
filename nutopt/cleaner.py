@@ -1,6 +1,7 @@
+import os
 import pandas as pd
 
-from nutopt.utils import *
+from .utils import *
 
 def clean_data():
     '''
@@ -9,7 +10,8 @@ def clean_data():
     Input: None
     Output: Dataframe
     '''
-    df = pd.read_csv('../data/nutrition.csv').drop(['Unnamed: 0', 'serving_size'], axis=1)
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__),
+                           'data/nutrition.csv')).drop(['Unnamed: 0', 'serving_size'], axis=1)
     # use the name as the index 
     df = df.drop('lucopene', axis=1)
     df = df.drop('fatty_acids_total_trans', axis=1)

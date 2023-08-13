@@ -10,16 +10,22 @@ subject to $l \leq A\mathbf{x} \leq u$, $\mathbf{x} \geq 0$
 where $c$ is the vector of calories per 100g, the ones vector $\mathcal{1}$ is the vector of weights in units of 100g, $\mathbf{x}$ is the vector of weights of each food in units of 100g, and $\gamma$ is the tradeoff variable. The constraints $l$ and $u$ are the lower and upper bounds on the nutrient features, respectively. The matrix $A$ is the matrix of constrained nutrients per 100g of each food.
 
 ## Usage
-```python main.py -f <food_list> --n_sweep <n> --n_plot <n>```
+```git clone ...
+cd Nut-Opt 
+pip install .```
+
+```python -m nutopt -f <food_list> --amino <y/n> --n_sweep <n> --n_plot <n> --plotdir <dir>```
 
 `-f` is a comma-separated list of foods to include in the optimization. If not specified, all foods are included.
+
+`--amino` is a flag to include amino acids in the optimization constraints. If not specified, amino acids are not included.
 
 `--n_sweep` is the number of tradeoff parameters $\gamma$ to sweep over.
 
 `--n_plot` is the number of superfoods to radar plot.
 
 ## Data
-The nutritional dataset in `data/` is from [kaggle](https://www.kaggle.com/datasets/trolukovich/nutritional-values-for-common-foods-and-products), originally sourced [here](https://www.nutritionvalue.org/).
+The nutritional dataset in `nutopt/data/` is from [kaggle](https://www.kaggle.com/datasets/trolukovich/nutritional-values-for-common-foods-and-products), originally sourced [here](https://www.nutritionvalue.org/).
 
 ## Constraints
 These are editable in `nutopt/definitions.py`. The default constraints are:

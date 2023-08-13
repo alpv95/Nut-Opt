@@ -4,3 +4,5 @@ notebooks/
 food_names_subset.csv
 nutrition_clean_subset.csv
 *__pycache__/*
+nutopt/__pycache__/*
+build/*

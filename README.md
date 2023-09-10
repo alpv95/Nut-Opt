@@ -19,7 +19,7 @@ pip install .
 ## Usage
 ```python -m nutopt -f <food_list> -a <amino y/n> --n_sweep <n> --n_plot <n> --plotdir <dir>```
 
-`-f` is a comma-separated list of foods to include in the optimization. If not specified, all foods are included.
+`-f` is a space-separated list of foods to include in the optimization. If not specified, all foods are included.
 
 `-a` is a flag to include amino acids in the optimization constraints. If not specified, amino acids are not included.
 
